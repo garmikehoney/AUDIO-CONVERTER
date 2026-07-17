@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speed Up + Bass Boost Converter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>Audio Speed + Bass Converter</h1>
+    <p class="subtitle">Upload audio atau paste link langsung, pilih preset, download hasilnya.</p>
+
+    <div class="tabs">
+      <button type="button" class="tab active" data-tab="upload">Upload File</button>
+      <button type="button" class="tab" data-tab="link">Paste Link</button>
+    </div>
+
+    <div class="tab-panel" data-panel="upload">
+      <label class="dropzone" for="fileInput">
+        <span id="fileLabel">Klik atau seret file audio ke sini (mp3, wav, ogg, flac, m4a)</span>
+        <input type="file" id="fileInput" accept="audio/*" hidden />
+      </label>
+    </div>
+
+    <div class="tab-panel hidden" data-panel="link">
+      <input type="url" id="urlInput" placeholder="https://contoh.com/lagu.mp3" />
+    </div>
+
+    <div class="presets">
+      <button type="button" class="preset" data-preset="2.3x">
+        <span class="preset-title">2.3x</span>
+        <span class="preset-sub">~4dB bass</span>
+      </button>
+      <button type="button" class="preset" data-preset="2.5x">
+        <span class="preset-title">2.5x</span>
+        <span class="preset-sub">~6dB bass</span>
+      </button>
+      <button type="button" class="preset" data-preset="2.7x">
+        <span class="preset-title">2.7x</span>
+        <span class="preset-sub">~8dB bass</span>
+      </button>
+    </div>
+
+    <button type="button" id="convertBtn" disabled>Pilih preset dulu</button>
+    <p id="statusMsg" class="status"></p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
