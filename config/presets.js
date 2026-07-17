@@ -1,5 +1,3 @@
-// 3 preset yang dipakai di menu. speed = faktor asetrate (pitch ikut naik, ini gaya "sped up"
-// bukan time-stretch), bassGain = dB buat filter bass ffmpeg.
 const PRESETS = {
   "2.3x": { speed: 2.3, bassGain: 4, label: "2.3x ~4dB" },
   "2.5x": { speed: 2.5, bassGain: 6, label: "2.5x ~6dB" },

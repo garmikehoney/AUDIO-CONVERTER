@@ -10,30 +10,16 @@ const { resolveFromUrl, HttpError, TMP_DIR } = require("../services/sourceResolv
 
 const router = express.Router();
 
-// Vercel Functions ngebatasin request body 4.5MB (di luar kendali kita, itu limit platform).
-// Upload langsung jadi 4MB kalau lagi jalan di Vercel. Di local/VPS ga ada batasan platform
-// kayak gitu jadi tetep 50MB. File lebih besar dari itu pakai fitur paste-link, itu ga lewat
-// body request user sama sekali (server yang download sendiri).
 const isVercel = !!process.env.VERCEL;
 const MAX_UPLOAD_BYTES = isVercel ? 4 * 1024 * 1024 : 50 * 1024 * 1024;
 
-// Sengaja ga filter berdasarkan Content-Type dari client di sini, itu header yang gampang
-// salah/dipalsuin. Validasi beneran "ini audio atau bukan" dilakuin lewat ffprobe di bawah,
-// setelah file diterima.
 const upload = multer({
   dest: TMP_DIR,
   limits: { fileSize: MAX_UPLOAD_BYTES },
 });
 
-// POST /api/convert
-// Body: multipart form dengan field "file" (opsional), atau field "url" (opsional, salah satu wajib ada).
-// Field "preset" wajib, salah satu dari "2.3x", "2.5x", "2.7x".
-// Response: file mp3 hasil convert langsung sebagai attachment (auto-download).
 router.post("/convert", upload.single("file"), async (req, res, next) => {
   const filesToCleanup = [];
-  // multer udah nulis file upload ke disk sebelum handler ini jalan, jadi daftarin ke
-  // cleanup duluan sebelum validasi apapun, biar ga jadi file nyampah kalau request-nya
-  // ternyata invalid (misal preset salah/kosong).
   if (req.file) filesToCleanup.push(req.file.path);
 
   try {

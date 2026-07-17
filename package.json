@@ -4,9 +4,7 @@
   "private": true,
   "description": "Web tool buat convert audio jadi versi sped up + bass boosted (3 preset: 2.3x/4dB, 2.5x/6dB, 2.7x/8dB). Bisa jalan local/VPS atau di-deploy ke Vercel.",
   "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
+  "scripts": { "start": "node server.js" },
   "dependencies": {
     "express": "^4.19.2",
     "multer": "^2.0.1",
